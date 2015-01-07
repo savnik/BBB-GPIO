@@ -1,0 +1,28 @@
+
+#
+# Setup Beaglebone Black to Ground Station
+# 
+# Author: Peter Savnik
+# 2015
+
+clear
+
+echo "Setup for Beaglebone Back to Ground Station"
+
+# Create links $SLOTS and $PINS
+export SLOTS=/sys/devices/bone_capemgr.9/slots
+export PINS=/sys/kernel/debug/pinctrl/44e10800.pinmux/pins
+
+echo "Setup Device Tree"
+# Create device tree
+./overlay/build
+# Copy device tree to firmware
+cp DM-GPIO-Test-00A0.dtbo.dtbo /lib/firmware/
+
+echo /lib/firmware/am33xx_pwm > $SLOTS
+echo /lib/firmware/DM-GPIO-Test > $SLOTS
+echo /lib/firmware/bone_pwm_P9_14 > $SLOTS
+
+cat $SLOTS
+
+echo "Done!"
