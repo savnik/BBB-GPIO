@@ -5,6 +5,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "gpio.h"
+#include "pwm.h"
 
 
 unsigned int M1EN;	// Enable

@@ -10,20 +10,21 @@
 #include <poll.h>
 
 /****************************************************************
- * pwm_export
+ * pwm_set_duty
+ * \input duty period in ns
  ****************************************************************/
-int pwm_export(unsigned int pwm)
+int pwm_set_duty(unsigned int duty)
 {
 	int fd, len;
 	char buf[MAX_BUF];
 
-	fd = open(SYSFS_GPIO_DIR "/export", O_WRONLY);
+	fd = open(SYSFS_PWM_DIR "/duty", O_WRONLY);
 	if (fd < 0) {
-		perror("pwm/export");
+		perror("/duty");
 		return fd;
 	}
 
-	len = snprintf(buf, sizeof(buf), "%d", pwm);
+	len = snprintf(buf, sizeof(buf), "%d", duty);
 	write(fd, buf, len);
 	close(fd);
 
@@ -31,162 +32,71 @@ int pwm_export(unsigned int pwm)
 }
 
 /****************************************************************
- * pwm_unexport
+ * pwm_set_period
+ * \input period in ns
  ****************************************************************/
-int pwm_unexport(unsigned int pwm)
+int pwm_set_period(unsigned int period)
 {
 	int fd, len;
 	char buf[MAX_BUF];
 
-	fd = open(SYSFS_GPIO_DIR "/unexport", O_WRONLY);
+	fd = open(SYSFS_PWM_DIR "/period", O_WRONLY);
 	if (fd < 0) {
-		perror("pwm/export");
+		perror("/period");
 		return fd;
 	}
 
-	len = snprintf(buf, sizeof(buf), "%d", pwm);
+	len = snprintf(buf, sizeof(buf), "%d", period);
 	write(fd, buf, len);
 	close(fd);
+
 	return 0;
 }
 
 /****************************************************************
- * pwm_set_dir
+ * pwm_set_polarity
+ * \input 1/0
  ****************************************************************/
-int pwm_set_dir(unsigned int pwm, PIN_DIRECTION out_flag)
+int pwm_set_polarity(unsigned int polarity)
 {
-	int fd;
+	int fd, len;
 	char buf[MAX_BUF];
 
-	snprintf(buf, sizeof(buf), SYSFS_GPIO_DIR  "/pwm%d/direction", pwm);
-
-	fd = open(buf, O_WRONLY);
+	fd = open(SYSFS_PWM_DIR "/duty", O_WRONLY);
 	if (fd < 0) {
-		perror("pwm/direction");
+		perror("/duty");
 		return fd;
 	}
 
-	if (out_flag == OUTPUT_PIN)
-		write(fd, "out", 4);
-	else
-		write(fd, "in", 3);
-
+	len = snprintf(buf, sizeof(buf), "%d", polarity);
+	write(fd, buf, len);
 	close(fd);
+
 	return 0;
 }
 
+
 /****************************************************************
- * pwm_set_value
+ * pwm_set_enable
+ * \input 1/0
  ****************************************************************/
-int pwm_set_value(unsigned int pwm, PIN_VALUE value)
+int pwm_set_eanble(unsigned int enable)
 {
-	int fd;
+	int fd, len;
 	char buf[MAX_BUF];
 
-	snprintf(buf, sizeof(buf), SYSFS_GPIO_DIR "/pwm%d/value", pwm);
-
-	fd = open(buf, O_WRONLY);
+	fd = open(SYSFS_PWM_DIR "/run", O_WRONLY);
 	if (fd < 0) {
-		perror("pwm/set-value");
+		perror("/run");
 		return fd;
 	}
 
-	if (value==LOW)
-		write(fd, "0", 2);
-	else
-		write(fd, "1", 2);
-
+	len = snprintf(buf, sizeof(buf), "%d", enable);
+	write(fd, buf, len);
 	close(fd);
-	return 0;
-}
 
-/****************************************************************
- * pwm_get_value
- ****************************************************************/
-int pwm_get_value(unsigned int pwm, unsigned int *value)
-{
-	int fd;
-	char buf[MAX_BUF];
-	char ch;
-
-	snprintf(buf, sizeof(buf), SYSFS_GPIO_DIR "/pwm%d/value", pwm);
-
-	fd = open(buf, O_RDONLY);
-	if (fd < 0) {
-		perror("pwm/get-value");
-		return fd;
-	}
-
-	read(fd, &ch, 1);
-
-	if (ch != '0') {
-		*value = 1;
-	} else {
-		*value = 0;
-	}
-
-	close(fd);
 	return 0;
 }
 
 
-/****************************************************************
- * pwm_set_edge
- ****************************************************************/
 
-int pwm_set_edge(unsigned int pwm, char *edge)
-{
-	int fd;
-	char buf[MAX_BUF];
-
-	snprintf(buf, sizeof(buf), SYSFS_GPIO_DIR "/pwm%d/edge", pwm);
-
-	fd = open(buf, O_WRONLY);
-	if (fd < 0) {
-		perror("pwm/set-edge");
-		return fd;
-	}
-
-	write(fd, edge, strlen(edge) + 1);
-	close(fd);
-	return 0;
-}
-
-/****************************************************************
- * pwm_fd_open
- ****************************************************************/
-
-int pwm_fd_open(unsigned int pwm)
-{
-	int fd;
-	char buf[MAX_BUF];
-
-	snprintf(buf, sizeof(buf), SYSFS_GPIO_DIR "/pwm%d/value", pwm);
-
-	fd = open(buf, O_RDONLY | O_NONBLOCK );
-	if (fd < 0) {
-		perror("pwm/fd_open");
-	}
-	return fd;
-}
-
-/****************************************************************
- * pwm_fd_close
- ****************************************************************/
-
-int pwm_fd_close(int fd)
-{
-	return close(fd);
-}
-
-
-/****************************************************************
- * Calculate GPIO NO
- * pwm[0]28
- * bank = 0, n = 28
- * return 28
- ****************************************************************/
-
-int pwm_no(int bank, int n){
-  return bank*32+n;  
-}
