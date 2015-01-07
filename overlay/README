@@ -9,4 +9,5 @@
 1. ./build
 2. cp *.dtbo /lib/firmware/
 3. /lib/firmware/ echo DM-GPIO-Test > $SLOTS
+  /lib/firmware/ echo bone_pwm_P9_16 > $SLOTS // Enable PWM
 (4.) check update with cat $SLOTS
