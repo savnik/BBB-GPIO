@@ -46,10 +46,10 @@ int main(int argc, char *argv[]){
 	// Flash the LED 5 times
 	for(i=0; i<100; i++){
 		printf("Setting the M1EN on\n");
-                gpio_set_value(M1EN, HIGH);
+                gpio_set_value(M1NA, HIGH);
 		usleep(200000);         // on for 200ms
 		printf("Setting the M1EN off\n");
-                gpio_set_value(M1EN, LOW);
+                gpio_set_value(M1NA, LOW);
 		usleep(200000);         // off for 200ms
 	}
 
