@@ -14,9 +14,9 @@ unsigned int M1NB;	// Direction
 unsigned int M1CS;	// Current sense
 
 int main(int argc, char *argv[]){
-	int i;
 	
-	printf("Testing the GPIO Pins\n");
+	
+	printf("Testing the Motor\n");
 
 	M1EN = gpio_no(0,30);	// P9-11
 	M1NA = gpio_no(1,28);	// P9-12
@@ -46,41 +46,31 @@ int main(int argc, char *argv[]){
 	// Setup PWM 
 	pwm_set_enable(0);
 	pwm_set_period(5000000);
-	pwm_set_duty(1000000);
+	pwm_set_duty(0);
 	pwm_set_polarity(1);
 	
 	
-	// Start
+	// Setup motor
+	printf("Set up motor\n");
+	gpio_set_value(M1EN, HIGH);
+	pwm_set_duty(0);
 	pwm_set_enable(1);
 	
-	// Flash the LED 5 times
-	for(i=0; i<100; i++){
-		printf("Setting the M1EN on\n");
-                gpio_set_value(M1EN, HIGH);
-		gpio_set_value(M1NA, HIGH);
-		gpio_set_value(M1NB, HIGH);
-		gpio_set_value(M1CS, HIGH);
-		usleep(200000);         // on for 200ms
-		printf("Setting the M1EN off\n");
-                gpio_set_value(M1EN, LOW);
-		gpio_set_value(M1NA, LOW);
-		gpio_set_value(M1NB, LOW);
-		gpio_set_value(M1CS, LOW);
-		usleep(200000);         // off for 200ms
+	int i = 0; 
+	int t = 0;
+	printf("Main loop started");
+	while(1){
+	    pwm_set_duty(i);
+	    if(i >= 5000000) t = 1;
+	    if(i <= 0) t = 0;
+	    
+	    if (t==1) i--;
+	    if (t== 0) i++;
+	      
+	  
 	}
-
-	/*
-
-	unsigned int value = LOW;
-	do {
-		gpio_get_value(ButtonGPIO, &value); 
-		printf(".");
-		usleep(1000);      // sleep for one millisecond
-	} while (value!=HIGH);
-	printf("\nButton was just pressed!\n");
-      */
       
-	printf("Finished Testing the GPIO Pins\n");
+	printf("Finished Motor\n");
 	gpio_unexport(M1EN);
 	gpio_unexport(M1NA);
 	gpio_unexport(M1NB);
