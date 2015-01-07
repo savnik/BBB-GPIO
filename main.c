@@ -11,7 +11,6 @@
 unsigned int M1EN;	// Enable
 unsigned int M1NA;	// Direction
 unsigned int M1NB;	// Direction
-unsigned int M1PWM;	// PWM signal
 unsigned int M1CS;	// Current sense
 
 int main(int argc, char *argv[]){
@@ -22,7 +21,6 @@ int main(int argc, char *argv[]){
 	M1EN = gpio_no(0,30);	// P9-11
 	M1NA = gpio_no(1,28);	// P9-12
 	M1NB = gpio_no(0,31);	// P9-13
-	
 	M1CS = gpio_no(1,19);	// P9-15
 	
 	// echo n > export
@@ -42,7 +40,7 @@ int main(int argc, char *argv[]){
 	gpio_set_value(M1NA, LOW);
 	gpio_set_value(M1NB, LOW);
 	gpio_set_value(M1CS, LOW);
-	//gpio_set_value(M1PWM, LOW);
+	
 	
 	
 	// Setup PWM 
@@ -58,10 +56,16 @@ int main(int argc, char *argv[]){
 	// Flash the LED 5 times
 	for(i=0; i<100; i++){
 		printf("Setting the M1EN on\n");
-                gpio_set_value(M1NA, HIGH);
+                gpio_set_value(M1EN, HIGH);
+		gpio_set_value(M1NA, HIGH);
+		gpio_set_value(M1NB, HIGH);
+		gpio_set_value(M1CS, HIGH);
 		usleep(200000);         // on for 200ms
 		printf("Setting the M1EN off\n");
-                gpio_set_value(M1NA, LOW);
+                gpio_set_value(M1EN, LOW);
+		gpio_set_value(M1NA, LOW);
+		gpio_set_value(M1NB, LOW);
+		gpio_set_value(M1CS, LOW);
 		usleep(200000);         // off for 200ms
 	}
 
