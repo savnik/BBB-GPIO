@@ -46,7 +46,7 @@ int main(int argc, char *argv[]){
 	// Setup PWM 
 	pwm_set_enable(0);
 	pwm_set_period(5000000);
-	pwm_set_duty(2500000);
+	pwm_set_duty(100000);
 	pwm_set_polarity(1);
 	
 	
@@ -85,5 +85,6 @@ int main(int argc, char *argv[]){
 	gpio_unexport(M1NA);
 	gpio_unexport(M1NB);
 	gpio_unexport(M1CS);
+	pwm_set_enable(0);
 	return 0;
 }
