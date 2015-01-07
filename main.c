@@ -18,7 +18,7 @@ int main(int argc, char *argv[]){
 	
 	printf("Testing the GPIO Pins\n");
 
-	M1EN = gpio_no(0,3);	// P9-11
+	M1EN = gpio_no(0,30);	// P9-11
 	M1NA = gpio_no(1,28);	// P9-12
 	M1NB = gpio_no(0,31);	// P9-13
 	M1CS = gpio_no(1,16);	// P9-15
