@@ -80,7 +80,7 @@ int pwm_set_polarity(unsigned int polarity)
  * pwm_set_enable
  * \input 1/0
  ****************************************************************/
-int pwm_set_eanble(unsigned int enable)
+int pwm_set_enable(unsigned int enable)
 {
 	int fd, len;
 	char buf[MAX_BUF];

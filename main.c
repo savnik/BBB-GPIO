@@ -45,6 +45,16 @@ int main(int argc, char *argv[]){
 	//gpio_set_value(M1PWM, LOW);
 	
 	
+	// Setup PWM 
+	pwm_set_enable(0);
+	pwm_set_period(5000000);
+	pwm_set_duty(2500000);
+	pwm_set_polarity(1);
+	
+	
+	// Start
+	pwm_set_enable(1);
+	
 	// Flash the LED 5 times
 	for(i=0; i<100; i++){
 		printf("Setting the M1EN on\n");
