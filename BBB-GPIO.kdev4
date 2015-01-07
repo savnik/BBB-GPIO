@@ -1,0 +1,4 @@
+[Project]
+Name=BBB-GPIO
+Manager=KDevCustomMakeManager
+VersionControl=kdevgit
