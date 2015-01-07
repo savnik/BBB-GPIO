@@ -185,3 +185,15 @@ int gpio_fd_close(int fd)
 {
 	return close(fd);
 }
+
+
+/****************************************************************
+ * Calculate GPIO NO
+ * gpio[0]28
+ * bank = 0, n = 28
+ * return 28
+ ****************************************************************/
+
+int gpio_no(int bank, int n){
+  return bank*32+n  
+}

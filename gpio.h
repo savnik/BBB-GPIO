@@ -30,5 +30,6 @@ int gpio_get_value(unsigned int gpio, unsigned int *value);
 int gpio_set_edge(unsigned int gpio, char *edge);
 int gpio_fd_open(unsigned int gpio);
 int gpio_fd_close(int fd);
+int gpio_no(int bank, int n);
 
 #endif /* GPIO_H_ */
