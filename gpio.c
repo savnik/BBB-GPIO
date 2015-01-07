@@ -195,5 +195,5 @@ int gpio_fd_close(int fd)
  ****************************************************************/
 
 int gpio_no(int bank, int n){
-  return bank*32+n  
+  return bank*32+n;  
 }
