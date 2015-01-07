@@ -9,6 +9,9 @@ clear
 
 echo "\nSetup for Beaglebone Back to Ground Station\n"
 
+echo "Fixing Network"
+/sbin/route add default gw 192.168.7.1
+
 # Create links $SLOTS and $PINS
 export SLOTS=/sys/devices/bone_capemgr.9/slots
 export PINS=/sys/kernel/debug/pinctrl/44e10800.pinmux/pins
