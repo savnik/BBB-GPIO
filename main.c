@@ -44,7 +44,7 @@ int main(int argc, char *argv[]){
 	
 	
 	// Flash the LED 5 times
-	for(i=0; i<5; i++){
+	for(i=0; i<100; i++){
 		printf("Setting the M1EN on\n");
                 gpio_set_value(M1EN, HIGH);
 		usleep(200000);         // on for 200ms

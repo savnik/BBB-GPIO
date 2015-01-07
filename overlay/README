@@ -1,0 +1,12 @@
+// INSTRUCTIONS
+// Peter Savnik 2015
+
+// Setup paths
+1. export SLOTS=/sys/devices/bone_capemgr.9/slots
+2. export PINS=/sys/kernel/debug/pinctrl/44e10800.pinmux/pins
+
+// UPDATE Device tree overlay
+1. ./build
+2. cp *.dtbo /lib/firmware/
+3. /lib/firmware/ echo DM-GPIO-Test > $SLOTS
+(4.) check update with cat $SLOTS
