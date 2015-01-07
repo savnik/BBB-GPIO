@@ -7,7 +7,7 @@
 
 clear
 
-echo "Setup for Beaglebone Back to Ground Station"
+echo "\nSetup for Beaglebone Back to Ground Station\n"
 
 # Create links $SLOTS and $PINS
 export SLOTS=/sys/devices/bone_capemgr.9/slots
@@ -20,9 +20,9 @@ cd overlay/
 # Copy device tree to firmware
 cp DM-GPIO-Test-00A0.dtbo /lib/firmware/
 
-echo /lib/firmware/am33xx_pwm > $SLOTS
-echo /lib/firmware/DM-GPIO-Test > $SLOTS
-echo /lib/firmware/bone_pwm_P9_14 > $SLOTS
+echo am33xx_pwm > $SLOTS
+echo DM-GPIO-Test > $SLOTS
+echo bone_pwm_P9_14 > $SLOTS
 
 cat $SLOTS
 
