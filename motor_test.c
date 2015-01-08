@@ -14,7 +14,8 @@ unsigned int M1NB;	// Direction
 unsigned int M1CS;	// Current sense
 
 int main(int argc, char *argv[]){
-	
+	int i = 0; 
+	int t = 0;
 	
 	printf("Testing the Motor\n");
 
@@ -41,14 +42,11 @@ int main(int argc, char *argv[]){
 	gpio_set_value(M1NB, LOW);
 	gpio_set_value(M1CS, LOW);
 	
-	
-	
 	// Setup PWM 
 	pwm_set_enable(0);
 	pwm_set_period(5000000);
 	pwm_set_duty(0);
 	pwm_set_polarity(1);
-	
 	
 	// Setup motor
 	printf("Setting up motor\n");
@@ -59,19 +57,21 @@ int main(int argc, char *argv[]){
 	pwm_set_enable(1);
 	printf("PWM enable\n");
 	
-	int i = 0; 
-	int t = 0;
-	
 	printf("Main loop started");
 	while(1){
 	    pwm_set_duty(i);
 	    if(i >= 5000000) t = 1;
 	    if(i <= 0) t = 0;
 	    
-	    if (t==1) i--;
-	    if (t== 0) i++;
+	    if (t==1){ 
+	      i--;
+	      printf("Toogle! 1\n");
+	    }
+	    if (t== 0){ 
+	      i++;
+	      printf("Toogle! 0\n");
+	    }
 	      
-	  
 	}
       
 	printf("Finished Motor\n");
