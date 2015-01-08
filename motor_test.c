@@ -51,13 +51,17 @@ int main(int argc, char *argv[]){
 	
 	
 	// Setup motor
-	printf("Set up motor\n");
+	printf("Setting up motor\n");
 	gpio_set_value(M1EN, HIGH);
+	printf("Motor Enable\n");
 	pwm_set_duty(0);
+	printf("Duty: 0\n");
 	pwm_set_enable(1);
+	printf("PWM enable\n");
 	
 	int i = 0; 
 	int t = 0;
+	
 	printf("Main loop started");
 	while(1){
 	    pwm_set_duty(i);
