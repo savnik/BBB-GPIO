@@ -60,16 +60,20 @@ int main(int argc, char *argv[]){
 	printf("Main loop started");
 	while(1){
 	    pwm_set_duty(i);
-	    if(i >= 5000000) t = 1;
-	    if(i <= 0) t = 0;
-	    
-	    if (t==1){ 
-	      i--;
+	    if(i >= 5000000){ 
+	      t = 1;
 	      printf("Toogle! 1\n");
 	    }
-	    if (t== 0){ 
-	      i++;
+	    if(i <= 0){ 
+	      t = 0;
 	      printf("Toogle! 0\n");
+	    }
+	    
+	    if (t == 1){ 
+	      i--;
+	    }
+	    if (t == 0){ 
+	      i++;
 	    }
 	      
 	}
