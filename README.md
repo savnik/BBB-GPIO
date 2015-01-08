@@ -1,2 +1,10 @@
 # BBB-GPIO
 Beagle Bone Black GPIO test
+
+PIN Configuration
+
+P9 11	M1EN
+P9 12	M1NA
+P9 13	M1NB
+P9 14	M1PWM
+P9 15	M1CS

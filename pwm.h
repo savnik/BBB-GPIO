@@ -5,7 +5,7 @@
  * Constants
  ****************************************************************/
 
-#define SYSFS_PWM_DIR "/sys/devices/ocp.3/pwm_test_P9_14.17"
+#define SYSFS_PWM_DIR "/sys/devices/ocp.3/pwm_test_P9_14.16"
 #define POLL_TIMEOUT (3 * 1000) /* 3 seconds */
 #define MAX_BUF 64
 
