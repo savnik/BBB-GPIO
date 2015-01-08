@@ -38,7 +38,7 @@ int main(int argc, char *argv[]){
 	
 	// echo 1/0 > value
 	gpio_set_value(M1EN, LOW);
-	gpio_set_value(M1NA, LOW);
+	gpio_set_value(M1NA, HIGH);
 	gpio_set_value(M1NB, LOW);
 	gpio_set_value(M1CS, LOW);
 	
@@ -70,10 +70,10 @@ int main(int argc, char *argv[]){
 	    }
 	    
 	    if (t == 1){ 
-	      i--;
+	      i -= 10;
 	    }
 	    if (t == 0){ 
-	      i++;
+	      i += 10;
 	    }
 	      
 	}
